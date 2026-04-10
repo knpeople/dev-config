@@ -1,1 +1,1 @@
-./node_modules/.bin/commitlint --edit "$1"
+node node_modules/@knpeople/dev-config/scripts/commitlint.js "$1"
