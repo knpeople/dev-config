@@ -35,11 +35,11 @@ if (!fs.existsSync(commitlintrc)) {
   console.log("created: .commitlintrc.json");
 }
 
-// .versionrc.js 생성 (없을 때만)
-const versionrc = path.join(projectRoot, ".versionrc.js");
+// .versionrc.cjs 생성 (없을 때만, type:module 여부 무관하게 .cjs 사용)
+const versionrc = path.join(projectRoot, ".versionrc.cjs");
 if (!fs.existsSync(versionrc)) {
   fs.writeFileSync(versionrc, 'module.exports = require("@knpeople/dev-config/versionrc");\n');
-  console.log("created: .versionrc.js");
+  console.log("created: .versionrc.cjs");
 }
 
 // package.json에 release 스크립트 추가 (없을 때만)
