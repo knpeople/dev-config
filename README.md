@@ -42,16 +42,6 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 - `.commitlintrc.json` — commitlint 설정
 - `.versionrc.js` — 체인지로그 설정
 
-### 3. `package.json` 스크립트 추가
-
-```json
-{
-  "scripts": {
-    "release": "standard-version --config node_modules/@knpeople/dev-config/versionrc.js"
-  }
-}
-```
-
 ---
 
 ## 사용법

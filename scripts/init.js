@@ -41,3 +41,13 @@ if (!fs.existsSync(versionrc)) {
   fs.writeFileSync(versionrc, 'module.exports = require("@knpeople/dev-config/versionrc");\n');
   console.log("created: .versionrc.js");
 }
+
+// package.json에 release 스크립트 추가 (없을 때만)
+const pkgPath = path.join(projectRoot, "package.json");
+const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+if (!pkg.scripts?.release) {
+  pkg.scripts = pkg.scripts || {};
+  pkg.scripts.release = "node node_modules/@knpeople/dev-config/scripts/release.js";
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
+  console.log("added: scripts.release to package.json");
+}
