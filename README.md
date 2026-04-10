@@ -1,4 +1,4 @@
-# dev-config
+# @knpeople/dev-config
 
 커밋 컨벤션, 체인지로그 설정을 여러 프로젝트에서 공유하기 위한 패키지입니다.
 
@@ -6,55 +6,50 @@
 
 - **commitlint** 규칙 공유
 - **standard-version** 체인지로그/버전 설정 공유
-- **husky** `commit-msg` 훅 자동 설치 스크립트
+- **husky** `commit-msg` 훅 자동 설치
 
 ---
 
 ## 설치
 
+### 1. `package.json`에 allowlist 추가
+
+pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다. 아래를 추가해야 설치 후 자동 초기화가 실행됩니다.
+
+```json
+{
+  "pnpm": {
+    "onlyBuiltDependencies": ["@knpeople/dev-config"]
+  }
+}
+```
+
+### 2. 설치
+
 ```bash
-pnpm add -D husky github:knpeople/dev-config
+pnpm add -D github:knpeople/dev-config
 ```
 
 특정 버전으로 설치:
 
 ```bash
-pnpm add -D husky github:knpeople/dev-config#v1.0.0
+pnpm add -D github:knpeople/dev-config#v1.0.0
 ```
 
----
+설치하면 자동으로 아래 파일들이 생성됩니다:
 
-## 설정
+- `.husky/commit-msg` — 커밋 메시지 검사 훅
+- `.commitlintrc.json` — commitlint 설정
+- `.versionrc.js` — 체인지로그 설정
 
-### 1. husky 초기화
-
-```bash
-node node_modules/dev-config/scripts/init.js
-```
-
-이후 `pnpm install` 시 자동 실행되도록 `prepare` 스크립트를 추가합니다.
-
-### 2. `package.json`
+### 3. `package.json` 스크립트 추가
 
 ```json
 {
   "scripts": {
-    "prepare": "node node_modules/dev-config/scripts/init.js",
-    "release": "standard-version --config node_modules/dev-config/versionrc.js"
+    "release": "standard-version --config node_modules/@knpeople/dev-config/versionrc.js"
   }
 }
-```
-
-### 3. `.commitlintrc.json`
-
-```json
-{ "extends": ["dev-config/commitlint"] }
-```
-
-### 4. `.versionrc.js`
-
-```js
-module.exports = require("dev-config/versionrc");
 ```
 
 ---
