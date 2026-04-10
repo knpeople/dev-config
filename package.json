@@ -9,8 +9,7 @@
     "scripts/"
   ],
   "scripts": {
-    "release": "standard-version --config versionrc.js",
-    "prepare": "husky"
+    "release": "standard-version --config versionrc.js"
   },
   "repository": {
     "type": "git",

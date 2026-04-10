@@ -1,4 +1,4 @@
-# @knpeople/dev-config
+# dev-config
 
 커밋 컨벤션, 체인지로그 설정을 여러 프로젝트에서 공유하기 위한 패키지입니다.
 
@@ -13,7 +13,13 @@
 ## 설치
 
 ```bash
-pnpm add -D husky @knpeople/dev-config
+pnpm add -D husky github:knpeople/dev-config
+```
+
+특정 버전으로 설치:
+
+```bash
+pnpm add -D husky github:knpeople/dev-config#v1.0.0
 ```
 
 ---
@@ -23,18 +29,18 @@ pnpm add -D husky @knpeople/dev-config
 ### 1. husky 초기화
 
 ```bash
-node node_modules/@knpeople/dev-config/scripts/init.js
+node node_modules/dev-config/scripts/init.js
 ```
 
-이후 `npm install` 시 자동 실행되도록 `prepare` 스크립트를 추가합니다.
+이후 `pnpm install` 시 자동 실행되도록 `prepare` 스크립트를 추가합니다.
 
 ### 2. `package.json`
 
 ```json
 {
   "scripts": {
-    "prepare": "node node_modules/@knpeople/dev-config/scripts/init.js",
-    "release": "standard-version --config node_modules/@knpeople/dev-config/versionrc.js"
+    "prepare": "node node_modules/dev-config/scripts/init.js",
+    "release": "standard-version --config node_modules/dev-config/versionrc.js"
   }
 }
 ```
@@ -42,13 +48,13 @@ node node_modules/@knpeople/dev-config/scripts/init.js
 ### 3. `.commitlintrc.json`
 
 ```json
-{ "extends": ["@knpeople/dev-config/commitlint"] }
+{ "extends": ["dev-config/commitlint"] }
 ```
 
 ### 4. `.versionrc.js`
 
 ```js
-module.exports = require("@knpeople/dev-config/versionrc");
+module.exports = require("dev-config/versionrc");
 ```
 
 ---
