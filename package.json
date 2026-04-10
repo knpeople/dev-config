@@ -9,7 +9,8 @@
     "scripts/"
   ],
   "scripts": {
-    "release": "standard-version --config versionrc.js"
+    "release": "standard-version --config versionrc.js",
+    "postinstall": "node scripts/init.js"
   },
   "repository": {
     "type": "git",

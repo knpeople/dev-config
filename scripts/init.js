@@ -23,3 +23,17 @@ for (const hook of fs.readdirSync(srcDir)) {
   fs.chmodSync(dest, 0o755);
   console.log(`copied: .husky/${hook}`);
 }
+
+// .commitlintrc.json 생성 (없을 때만)
+const commitlintrc = path.join(projectRoot, ".commitlintrc.json");
+if (!fs.existsSync(commitlintrc)) {
+  fs.writeFileSync(commitlintrc, JSON.stringify({ extends: ["dev-config/commitlint"] }, null, 2) + "\n");
+  console.log("created: .commitlintrc.json");
+}
+
+// .versionrc.js 생성 (없을 때만)
+const versionrc = path.join(projectRoot, ".versionrc.js");
+if (!fs.existsSync(versionrc)) {
+  fs.writeFileSync(versionrc, 'module.exports = require("dev-config/versionrc");\n');
+  console.log("created: .versionrc.js");
+}
