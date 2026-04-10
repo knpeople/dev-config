@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+const { execSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
+
+const projectRoot = process.cwd();
+const huskyDir = path.join(projectRoot, ".husky");
+const srcDir = path.join(__dirname, "..", "husky");
+
+// husky 초기화 (npm/pnpm/yarn 자동 감지)
+const agent = process.env.npm_config_user_agent || "";
+const runner = agent.startsWith("pnpm") ? "pnpm exec" : agent.startsWith("yarn") ? "yarn" : "npx";
+execSync(`${runner} husky init`, { stdio: "inherit" });
+
+// husky init이 자동 생성하는 pre-commit 제거
+const preCommit = path.join(huskyDir, "pre-commit");
+if (fs.existsSync(preCommit)) fs.rmSync(preCommit);
+
+// 훅 파일 복사
+for (const hook of fs.readdirSync(srcDir)) {
+  const dest = path.join(huskyDir, hook);
+  fs.copyFileSync(path.join(srcDir, hook), dest);
+  fs.chmodSync(dest, 0o755);
+  console.log(`copied: .husky/${hook}`);
+}

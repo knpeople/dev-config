@@ -1,0 +1,29 @@
+{
+  "name": "@knpeople/dev-config",
+  "version": "1.0.0",
+  "description": "개발 공통 설정",
+  "files": [
+    "commitlint.js",
+    "versionrc.js",
+    "husky/",
+    "scripts/"
+  ],
+  "scripts": {
+    "release": "standard-version --config versionrc.js",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knpeople/dev-config.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "conventional-changelog-conventionalcommits": "^7.0.0",
+    "standard-version": "^9.5.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}

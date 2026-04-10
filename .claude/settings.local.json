@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node_modules/.bin/commitlint --print-config)",
+      "Bash(npx --no-install commitlint --edit .git/COMMIT_EDITMSG)",
+      "Bash(echo \"exit: $?\")"
+    ]
+  }
+}
