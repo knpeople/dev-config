@@ -51,12 +51,29 @@ yarn add -D github:knpeople/dev-config#v1.0.0
 pnpm add -D github:knpeople/dev-config#v1.0.0
 ```
 
-설치하면 자동으로 아래 파일들이 생성됩니다:
+설치하면 자동으로 아래가 생성됩니다:
 
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
 - `.husky/pre-push` — 직접 `git push` 차단 훅
 - `.versionrc.cjs` — 체인지로그 설정
-- `package.json`의 `push`, `release` 스크립트
+- `package.json`에 아래 스크립트 추가
+
+```json
+{
+  "scripts": {
+    "push": "node node_modules/@knpeople/dev-config/scripts/push.js",
+    "release": "node node_modules/@knpeople/dev-config/scripts/release.js"
+  }
+}
+```
+
+### 스크립트 강제 업데이트
+
+`push`, `release` 스크립트가 이미 있어서 자동 설정이 안 됐거나 경로가 잘못된 경우 아래 명령어로 강제로 덮어씁니다.
+
+```bash
+node node_modules/@knpeople/dev-config/scripts/update.js
+```
 
 ---
 
@@ -117,13 +134,23 @@ pnpm release
 **버전 직접 지정:**
 
 ```bash
-pnpm release -- --release-as patch   # 1.0.0 → 1.0.1
-pnpm release -- --release-as minor   # 1.0.0 → 1.1.0
-pnpm release -- --release-as major   # 1.0.0 → 2.0.0
+# npm
+npm run release -- --release-as patch   # 1.0.0 → 1.0.1
+npm run release -- --release-as minor   # 1.0.0 → 1.1.0
+npm run release -- --release-as major   # 1.0.0 → 2.0.0
+# yarn
+yarn release --release-as patch
+# pnpm
+pnpm release -- --release-as patch
 ```
 
 **첫 릴리즈:**
 
 ```bash
+# npm
+npm run release -- --first-release
+# yarn
+yarn release --first-release
+# pnpm
 pnpm release -- --first-release
 ```
