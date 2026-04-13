@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.4](https://github.com/knpeople/dev-config/compare/v1.2.3...v1.2.4) (2026-04-13)
+
+
+### Bug Fixes
+
+* add 타입 버전 변경 버그 수정 ([fbe5b3e](https://github.com/knpeople/dev-config/commit/fbe5b3e299f8b3365e6b9052fb636854c730c8b5))
+
 ### [1.2.3](https://github.com/knpeople/dev-config/compare/v1.2.2...v1.2.3) (2026-04-13)
 
 
