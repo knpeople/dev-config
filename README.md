@@ -14,7 +14,7 @@
 
 ### 1. `package.json`에 allowlist 추가
 
-pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다. 아래를 추가해야 설치 후 자동 초기화가 실행됩니다.
+pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다. 설치 전에 아래를 먼저 추가해야 합니다.
 
 ```json
 {
@@ -40,7 +40,8 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
 - `.commitlintrc.json` — commitlint 설정
-- `.versionrc.js` — 체인지로그 설정
+- `.versionrc.cjs` — 체인지로그 설정
+- `package.json`의 `release` 스크립트
 
 ---
 
