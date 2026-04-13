@@ -6,15 +6,27 @@
 
 - **commitlint** 규칙 공유
 - **standard-version** 체인지로그/버전 설정 공유
-- **husky** `commit-msg` 훅 자동 설치
+- **husky** `commit-msg`, `pre-push` 훅 자동 설치
 
 ---
 
 ## 설치
 
-### 1. `package.json`에 allowlist 추가
+### npm
 
-pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다. 설치 전에 아래를 먼저 추가해야 합니다.
+```bash
+npm install --save-dev github:knpeople/dev-config
+```
+
+### yarn
+
+```bash
+yarn add -D github:knpeople/dev-config
+```
+
+### pnpm
+
+pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다. 설치 전에 `package.json`에 아래를 추가해야 합니다.
 
 ```json
 {
@@ -24,15 +36,18 @@ pnpm은 GitHub 패키지의 스크립트 실행을 기본적으로 막습니다.
 }
 ```
 
-### 2. 설치
-
 ```bash
 pnpm add -D github:knpeople/dev-config
 ```
 
-특정 버전으로 설치:
+### 특정 버전으로 설치
 
 ```bash
+# npm
+npm install --save-dev github:knpeople/dev-config#v1.0.0
+# yarn
+yarn add -D github:knpeople/dev-config#v1.0.0
+# pnpm
 pnpm add -D github:knpeople/dev-config#v1.0.0
 ```
 
@@ -42,7 +57,7 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 - `.husky/pre-push` — 직접 `git push` 차단 훅
 - `.commitlintrc.json` — commitlint 설정
 - `.versionrc.cjs` — 체인지로그 설정
-- `package.json`의 `release`, `push` 스크립트
+- `package.json`의 `push`, `release` 스크립트
 
 ---
 
@@ -73,16 +88,26 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 ### 푸쉬
 
 ```bash
+# npm
+npm run push
+# yarn
+yarn push
+# pnpm
 pnpm push
 ```
 
 - 마지막 태그 이후 `feat`, `fix`, `refactor`, `build`, `docs`, `revert` 커밋이 있으면 자동으로 릴리즈 후 push
 - 릴리즈할 커밋이 없으면 바로 push
-- 직접 `git push`는 차단됩니다. 반드시 `pnpm push`를 사용하세요.
+- 직접 `git push`는 차단됩니다. 반드시 위 명령어를 사용하세요.
 
 ### 체인지로그 생성
 
 ```bash
+# npm
+npm run release
+# yarn
+yarn release
+# pnpm
 pnpm release
 ```
 
