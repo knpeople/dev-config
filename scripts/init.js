@@ -32,11 +32,18 @@ if (!fs.existsSync(versionrc)) {
   console.log("created: .versionrc.cjs");
 }
 
-// package.json에 스크립트 추가 (없을 때만)
+// package.json 스크립트 수정
 const pkgPath = path.join(projectRoot, "package.json");
 const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
 pkg.scripts = pkg.scripts || {};
 let pkgChanged = false;
+
+// husky가 자동 추가하는 prepare 스크립트 제거
+if (pkg.scripts.prepare === "husky") {
+  delete pkg.scripts.prepare;
+  console.log("removed: scripts.prepare (husky auto-generated)");
+  pkgChanged = true;
+}
 
 if (!pkg.scripts.release) {
   pkg.scripts.release = "node node_modules/@knpeople/dev-config/scripts/release.js";
