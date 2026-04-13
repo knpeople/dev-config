@@ -27,7 +27,7 @@ try {
 }
 
 // 릴리즈 대상 커밋 여부 확인
-const hasReleasable = /^(feat|add|fix|refactor|build|docs|revert):/m.test(commits);
+const hasReleasable = /^(feat|add|fix|refactor):/m.test(commits);
 
 if (hasReleasable) {
   console.log("릴리즈 가능한 커밋이 있습니다. 릴리즈를 진행합니다...");

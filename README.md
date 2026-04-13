@@ -85,19 +85,21 @@ node node_modules/@knpeople/dev-config/scripts/update.js
 
 **허용된 타입:**
 
-| 타입 | 설명 |
-|---|---|
-| `feat` | 새로운 기능 |
-| `add` | 파일/패키지 추가 |
-| `fix` | 버그 수정 |
-| `refactor` | 코드 리팩토링 |
-| `build` | 빌드 설정 변경 |
-| `docs` | 문서 수정 |
-| `style` | 코드 포맷 변경 |
-| `test` | 테스트 추가/수정 |
-| `chore` | 기타 작업 |
-| `revert` | 이전 커밋 되돌리기 |
-| `init` | 초기 설정 |
+| 타입 | 설명 | 버전 |
+|---|---|---|
+| `feat` | 새로운 기능 추가 / 기존 기능 변경 | minor |
+| `add` | 파일/패키지 추가 | patch |
+| `fix` | 버그 수정 | patch |
+| `refactor` | 코드 리팩토링 | patch |
+| `build` | 빌드 설정 변경 | — |
+| `docs` | 문서 수정 | — |
+| `style` | 코드 포맷 변경 | — |
+| `test` | 테스트 추가/수정 | — |
+| `chore` | 기타 작업 | — |
+| `revert` | 이전 커밋 되돌리기 | — |
+| `init` | 초기 설정 | — |
+
+> `—` 타입은 CHANGELOG에는 기록되지 않으며 버전도 올라가지 않습니다.
 
 **형식:** `타입: 내용` (예: `feat: 로그인 기능 추가`)
 
@@ -112,7 +114,7 @@ yarn push
 pnpm push
 ```
 
-- 마지막 태그 이후 `feat`, `fix`, `refactor`, `build`, `docs`, `revert` 커밋이 있으면 자동으로 릴리즈 후 push
+- 마지막 태그 이후 `feat`, `add`, `fix`, `refactor` 커밋이 있으면 자동으로 릴리즈 후 push
 - 릴리즈할 커밋이 없으면 바로 push
 - 직접 `git push`는 차단됩니다. 반드시 위 명령어를 사용하세요.
 
