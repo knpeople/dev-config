@@ -4,7 +4,7 @@ module.exports = {
     { type: "feat", section: "🆕 Added" },
     { type: "add", section: "🆕 Added", release: "patch" },
     { type: "fix", section: "🐛 Fixed" },
-    { type: "refactor", section: "⚡ Improved" },
+    { type: "refactor", section: "⚡ Improved", release: "patch" },
     { type: "build", section: "⚡ Improved" },
     { type: "docs", section: "📚 Docs" },
     { type: "revert", section: "🗑️ Deprecated / Removed" },
