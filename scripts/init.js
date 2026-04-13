@@ -25,16 +25,6 @@ for (const hook of fs.readdirSync(srcDir)) {
   console.log(`copied: .husky/${hook}`);
 }
 
-// .commitlintrc.json 생성 (없을 때만)
-const commitlintrc = path.join(projectRoot, ".commitlintrc.json");
-if (!fs.existsSync(commitlintrc)) {
-  fs.writeFileSync(
-    commitlintrc,
-    JSON.stringify({ extends: ["@knpeople/dev-config/commitlint"] }, null, 2) + "\n"
-  );
-  console.log("created: .commitlintrc.json");
-}
-
 // .versionrc.cjs 생성 (없을 때만, type:module 여부 무관하게 .cjs 사용)
 const versionrc = path.join(projectRoot, ".versionrc.cjs");
 if (!fs.existsSync(versionrc)) {

@@ -55,7 +55,6 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
 - `.husky/pre-push` — 직접 `git push` 차단 훅
-- `.commitlintrc.json` — commitlint 설정
 - `.versionrc.cjs` — 체인지로그 설정
 - `package.json`의 `push`, `release` 스크립트
 
