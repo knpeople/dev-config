@@ -42,12 +42,24 @@ if (!fs.existsSync(versionrc)) {
   console.log("created: .versionrc.cjs");
 }
 
-// package.json에 release 스크립트 추가 (없을 때만)
+// package.json에 스크립트 추가 (없을 때만)
 const pkgPath = path.join(projectRoot, "package.json");
 const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
-if (!pkg.scripts?.release) {
-  pkg.scripts = pkg.scripts || {};
+pkg.scripts = pkg.scripts || {};
+let pkgChanged = false;
+
+if (!pkg.scripts.release) {
   pkg.scripts.release = "node node_modules/@knpeople/dev-config/scripts/release.js";
-  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
   console.log("added: scripts.release to package.json");
+  pkgChanged = true;
+}
+
+if (!pkg.scripts.push) {
+  pkg.scripts.push = "node node_modules/@knpeople/dev-config/scripts/push.js";
+  console.log("added: scripts.push to package.json");
+  pkgChanged = true;
+}
+
+if (pkgChanged) {
+  fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
 }

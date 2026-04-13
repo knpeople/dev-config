@@ -41,7 +41,7 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
 - `.commitlintrc.json` — commitlint 설정
 - `.versionrc.cjs` — 체인지로그 설정
-- `package.json`의 `release` 스크립트
+- `package.json`의 `release`, `push` 스크립트
 
 ---
 
@@ -68,6 +68,15 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 | `init` | 초기 설정 |
 
 **형식:** `타입: 내용` (예: `feat: 로그인 기능 추가`)
+
+### 푸쉬
+
+```bash
+pnpm push
+```
+
+- 마지막 태그 이후 `feat`, `fix`, `refactor`, `build`, `docs`, `revert` 커밋이 있으면 자동으로 릴리즈 후 push
+- 릴리즈할 커밋이 없으면 바로 push
 
 ### 체인지로그 생성
 
