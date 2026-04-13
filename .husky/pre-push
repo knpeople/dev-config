@@ -1,0 +1,4 @@
+if [ "$FROM_PUSH_SCRIPT" != "1" ]; then
+  echo "직접 git push는 금지되어 있습니다. 'pnpm push'를 사용하세요."
+  exit 1
+fi

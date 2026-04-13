@@ -39,6 +39,7 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 설치하면 자동으로 아래 파일들이 생성됩니다:
 
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
+- `.husky/pre-push` — 직접 `git push` 차단 훅
 - `.commitlintrc.json` — commitlint 설정
 - `.versionrc.cjs` — 체인지로그 설정
 - `package.json`의 `release`, `push` 스크립트
@@ -77,6 +78,7 @@ pnpm push
 
 - 마지막 태그 이후 `feat`, `fix`, `refactor`, `build`, `docs`, `revert` 커밋이 있으면 자동으로 릴리즈 후 push
 - 릴리즈할 커밋이 없으면 바로 push
+- 직접 `git push`는 차단됩니다. 반드시 `pnpm push`를 사용하세요.
 
 ### 체인지로그 생성
 

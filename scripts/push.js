@@ -34,4 +34,4 @@ if (hasReleasable) {
   console.log("릴리즈할 변경사항이 없습니다.");
 }
 
-run("git push --follow-tags");
+execSync("git push --follow-tags", { stdio: "inherit", env: { ...process.env, FROM_PUSH_SCRIPT: "1" } });
