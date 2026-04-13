@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "release": "standard-version --config versionrc.js",
+    "push": "node scripts/push.js",
     "postinstall": "node scripts/init.js"
   },
   "repository": {
