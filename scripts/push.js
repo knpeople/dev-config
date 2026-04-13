@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 const { execSync, spawnSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
+
+const flagFile = path.join(process.cwd(), ".push-allowed");
 
 function run(cmd) {
   execSync(cmd, { stdio: "inherit" });
@@ -34,4 +38,10 @@ if (hasReleasable) {
   console.log("릴리즈할 변경사항이 없습니다.");
 }
 
-execSync("git push --follow-tags", { stdio: "inherit", env: { ...process.env, FROM_PUSH_SCRIPT: "1" } });
+// 플래그 파일 생성 후 push, 이후 삭제
+fs.writeFileSync(flagFile, "");
+try {
+  run("git push --follow-tags");
+} finally {
+  fs.unlinkSync(flagFile);
+}
