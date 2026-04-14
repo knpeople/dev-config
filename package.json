@@ -10,6 +10,8 @@
   ],
   "scripts": {
     "release": "standard-version --config versionrc.js",
+    "release:minor": "standard-version --config versionrc.js --release-as minor",
+    "release:major": "standard-version --config versionrc.js --release-as major",
     "push": "node scripts/push.js",
     "postinstall": "node scripts/init.js"
   },
