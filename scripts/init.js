@@ -51,6 +51,18 @@ if (!pkg.scripts.release) {
   pkgChanged = true;
 }
 
+if (!pkg.scripts["release:minor"]) {
+  pkg.scripts["release:minor"] = "node node_modules/@knpeople/dev-config/scripts/release.js --release-as minor";
+  console.log("added: scripts.release:minor to package.json");
+  pkgChanged = true;
+}
+
+if (!pkg.scripts["release:major"]) {
+  pkg.scripts["release:major"] = "node node_modules/@knpeople/dev-config/scripts/release.js --release-as major";
+  console.log("added: scripts.release:major to package.json");
+  pkgChanged = true;
+}
+
 if (!pkg.scripts.push) {
   pkg.scripts.push = "node node_modules/@knpeople/dev-config/scripts/push.js";
   console.log("added: scripts.push to package.json");
