@@ -1,4 +1,7 @@
 # Changelog
+
+### [1.2.13](https://github.com/knpeople/dev-config/compare/v1.2.12...v1.2.13) (2026-04-15)
+
 ### [1.2.12](https://github.com/knpeople/dev-config/compare/v1.2.11...v1.2.12) (2026-04-15)
 
 
