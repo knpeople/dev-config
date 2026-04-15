@@ -1,4 +1,10 @@
-# Changel
+# Changelog
+### [1.2.12](https://github.com/knpeople/dev-config/compare/v1.2.11...v1.2.12) (2026-04-15)
+
+
+### Bug Fixes
+
+* 체인지 로그 버그 수정 ([ca1a423](https://github.com/knpeople/dev-config/commit/ca1a423e2c8ad2e33f5e66188f092d64bb3e14b0))
 
 ### [1.2.11](https://github.com/knpeople/dev-config/compare/v1.2.10...v1.2.11) (2026-04-15)
 
