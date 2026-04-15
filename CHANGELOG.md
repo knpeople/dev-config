@@ -1,13 +1,10 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+# Changel
 
 ### [1.2.11](https://github.com/knpeople/dev-config/compare/v1.2.10...v1.2.11) (2026-04-15)
 
-
 ### Bug Fixes
 
-* 체인지 로그 버그 수정 ([b02600c](https://github.com/knpeople/dev-config/commit/b02600ccaeb5c2201446a41a1d95eba5a9647b6f))
+- 체인지 로그 버그 수정 ([b02600c](https://github.com/knpeople/dev-config/commit/b02600ccaeb5c2201446a41a1d95eba5a9647b6f))
 
 ### [1.2.10](https://github.com/knpeople/dev-config/compare/v1.2.9...v1.2.10) (2026-04-15)
 
