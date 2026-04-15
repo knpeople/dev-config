@@ -1,4 +1,5 @@
 module.exports = {
+  header: "",
   releaseCommitMessageFormat: "chore: release {{currentTag}}",
   types: [
     { type: "feat", section: "🆕 Added" },
