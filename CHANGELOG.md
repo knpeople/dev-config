@@ -1,5 +1,7 @@
 # Changelog
 
+# test
+
 ### [1.2.10](https://github.com/knpeople/dev-config/compare/v1.2.9...v1.2.10) (2026-04-15)
 
 ### Bug Fixes
