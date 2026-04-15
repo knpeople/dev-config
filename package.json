@@ -9,7 +9,7 @@
     "scripts/"
   ],
   "standard-version": {
-    "header": "# Changelog"
+    "header": "# Changelog\n"
   },
   "scripts": {
     "release": "standard-version",
