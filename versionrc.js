@@ -1,5 +1,5 @@
 module.exports = {
-  header: "",
+  header: "# Changelog",
   releaseCommitMessageFormat: "chore: release {{currentTag}}",
   types: [
     { type: "feat", section: "🆕 Added" },
