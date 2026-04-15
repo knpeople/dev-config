@@ -32,7 +32,7 @@ const hasReleasable = /^(feat|add|fix|refactor):/m.test(commits);
 if (hasReleasable) {
   console.log("릴리즈 가능한 커밋이 있습니다. 릴리즈를 진행합니다...");
   const cli = require.resolve("standard-version/bin/cli.js");
-  const result = spawnSync("node", [cli], { stdio: "inherit" });
+  const result = spawnSync("node", [cli, "--config", "versionrc.js"], { stdio: "inherit" });
   if (result.status !== 0) process.exit(result.status ?? 1);
 } else {
   console.log("릴리즈할 변경사항이 없습니다.");
