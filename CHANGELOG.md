@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/knpeople/dev-config/compare/v1.2.13...v1.3.0) (2026-04-20)
+
+
+### Features
+
+* 스타일 체인지로그 추가 ([8bc95b9](https://github.com/knpeople/dev-config/commit/8bc95b9cd20fe9b96841ba1de2b8f4da6f913a7a))
+
 ### [1.2.13](https://github.com/knpeople/dev-config/compare/v1.2.12...v1.2.13) (2026-04-15)
 
 ### [1.2.12](https://github.com/knpeople/dev-config/compare/v1.2.11...v1.2.12) (2026-04-15)
