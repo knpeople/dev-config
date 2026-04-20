@@ -11,7 +11,7 @@ module.exports = {
     { type: "revert", section: "🗑️ Deprecated / Removed" },
     { type: "init", hidden: true },
     { type: "chore", hidden: true },
-    { type: "style", hidden: true },
+    { type: "style", section: "💄 Style" },
     { type: "test", hidden: true },
   ],
   writerOpts: {
