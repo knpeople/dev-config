@@ -42,7 +42,7 @@ jobs:
             RANGE="HEAD"
           fi
           COMMITS=$(git log --pretty=%s $RANGE)
-          if echo "$COMMITS" | grep -qE "^(feat|add|fix|refactor):"; then
+          if echo "$COMMITS" | grep -qE "^(feat|add|fix|refactor|break)!?:"; then
             echo "releasable=true" >> $GITHUB_OUTPUT
           else
             echo "releasable=false" >> $GITHUB_OUTPUT

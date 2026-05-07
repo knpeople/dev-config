@@ -8,6 +8,7 @@ module.exports = {
     { type: "refactor", section: "⚡ Improved", release: "patch" },
     { type: "build", section: "⚡ Improved" },
     { type: "docs", section: "📚 Docs" },
+    { type: "break", section: "💥 Breaking Changes", release: "major" },
     { type: "revert", section: "🗑️ Deprecated / Removed" },
     { type: "init", hidden: true },
     { type: "chore", hidden: true },

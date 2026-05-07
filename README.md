@@ -6,7 +6,7 @@
 
 - **commitlint** 규칙 공유
 - **standard-version** 체인지로그/버전 설정 공유
-- **husky** `commit-msg`, `pre-push` 훅 자동 설치
+- **husky** `commit-msg` 훅 자동 설치
 
 ---
 
@@ -54,26 +54,8 @@ pnpm add -D github:knpeople/dev-config#v1.0.0
 설치하면 자동으로 아래가 생성됩니다:
 
 - `.husky/commit-msg` — 커밋 메시지 검사 훅
-- `.husky/pre-push` — 직접 `git push` 차단 훅
 - `.versionrc.cjs` — 체인지로그 설정
-- `package.json`에 아래 스크립트 추가
-
-```json
-{
-  "scripts": {
-    "push": "node node_modules/@knpeople/dev-config/scripts/push.js",
-    "release": "node node_modules/@knpeople/dev-config/scripts/release.js"
-  }
-}
-```
-
-### 스크립트 강제 업데이트
-
-`push`, `release` 스크립트가 이미 있어서 자동 설정이 안 됐거나 경로가 잘못된 경우 아래 명령어로 강제로 덮어씁니다.
-
-```bash
-node node_modules/@knpeople/dev-config/scripts/update.js
-```
+- `.github/workflows/release.yml` — 자동 버저닝 워크플로우
 
 ---
 
@@ -87,6 +69,7 @@ node node_modules/@knpeople/dev-config/scripts/update.js
 
 | 타입 | 설명 | 버전 |
 |---|---|---|
+| `break` | 하위 호환되지 않는 변경 | major |
 | `feat` | 새로운 기능 추가 / 기존 기능 변경 | minor |
 | `add` | 파일/패키지 추가 | patch |
 | `fix` | 버그 수정 | patch |
@@ -99,60 +82,16 @@ node node_modules/@knpeople/dev-config/scripts/update.js
 | `revert` | 이전 커밋 되돌리기 | — |
 | `init` | 초기 설정 | — |
 
-> `—` 타입은 CHANGELOG에는 기록되지 않으며 버전도 올라가지 않습니다.
+> `—` 타입은 CHANGELOG에 기록되지 않으며 버전도 올라가지 않습니다.
 
 **형식:** `타입: 내용` (예: `feat: 로그인 기능 추가`)
 
-### 푸쉬
+### 버저닝
 
-```bash
-# npm
-npm run push
-# yarn
-yarn push
-# pnpm
-pnpm push
-```
+`main` 브랜치에 push하면 GitHub Actions가 자동으로 처리합니다.
 
-- 마지막 태그 이후 `feat`, `add`, `fix`, `refactor` 커밋이 있으면 자동으로 릴리즈 후 push
-- 릴리즈할 커밋이 없으면 바로 push
-- 직접 `git push`는 차단됩니다. 반드시 위 명령어를 사용하세요.
+- 마지막 태그 이후 `break`, `feat`, `add`, `fix`, `refactor` 커밋이 있으면 자동 릴리즈
+- `CHANGELOG.md` 업데이트, `package.json` 버전 bump, git 태그 생성 후 push
+- 릴리즈할 커밋이 없으면 아무것도 하지 않음
 
-### 체인지로그 생성
-
-```bash
-# npm
-npm run release
-# yarn
-yarn release
-# pnpm
-pnpm release
-```
-
-- 커밋 히스토리 기반으로 `CHANGELOG.md` 자동 생성
-- `package.json` 버전 자동 bump
-- git 태그 자동 생성
-
-**버전 직접 지정:**
-
-```bash
-# npm
-npm run release -- --release-as patch   # 1.0.0 → 1.0.1
-npm run release -- --release-as minor   # 1.0.0 → 1.1.0
-npm run release -- --release-as major   # 1.0.0 → 2.0.0
-# yarn
-yarn release --release-as patch
-# pnpm
-pnpm release -- --release-as patch
-```
-
-**첫 릴리즈:**
-
-```bash
-# npm
-npm run release -- --first-release
-# yarn
-yarn release --first-release
-# pnpm
-pnpm release -- --first-release
-```
+> GitHub Actions가 push할 수 있도록 레포지토리의 `Settings → Actions → General → Workflow permissions`을 **Read and write permissions**으로 설정해야 합니다.

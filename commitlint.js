@@ -14,6 +14,7 @@ module.exports = {
         "init",
         "feat",
         "add",
+        "break",
         "chore",
         "style",
         "fix",
