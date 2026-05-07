@@ -5,12 +5,26 @@ on:
     branches:
       - main
   workflow_call:
+    outputs:
+      changed:
+        description: 버전이 변경됐는지 여부
+        value: ${{ jobs.release.outputs.changed }}
+      previous_version:
+        description: 이전 버전
+        value: ${{ jobs.release.outputs.previous_version }}
+      version:
+        description: 변경된 버전
+        value: ${{ jobs.release.outputs.version }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      changed: ${{ steps.result.outputs.changed }}
+      previous_version: ${{ steps.result.outputs.previous_version }}
+      version: ${{ steps.result.outputs.version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -54,6 +68,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Get previous version
+        id: prev
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - name: Run standard-version
         if: steps.check.outputs.releasable == 'true'
         run: npx standard-version
@@ -61,3 +79,17 @@ jobs:
       - name: Push changes and tags
         if: steps.check.outputs.releasable == 'true'
         run: git push --follow-tags
+
+      - name: Set result outputs
+        id: result
+        run: |
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          if [ "${{ steps.check.outputs.releasable }}" == "true" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "previous_version=${{ steps.prev.outputs.version }}" >> $GITHUB_OUTPUT
+            echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "previous_version=${{ steps.prev.outputs.version }}" >> $GITHUB_OUTPUT
+            echo "version=${{ steps.prev.outputs.version }}" >> $GITHUB_OUTPUT
+          fi
