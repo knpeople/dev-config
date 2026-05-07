@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_call:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check for releasable commits
+        id: check
+        run: |
+          # 릴리즈 커밋 자체면 스킵
+          LAST_COMMIT=$(git log -1 --pretty=%s)
+          if echo "$LAST_COMMIT" | grep -qE "^chore: release"; then
+            echo "releasable=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$LAST_TAG" ]; then
+            RANGE="$LAST_TAG..HEAD"
+          else
+            RANGE="HEAD"
+          fi
+          COMMITS=$(git log --pretty=%s $RANGE)
+          if echo "$COMMITS" | grep -qE "^(feat|add|fix|refactor):"; then
+            echo "releasable=true" >> $GITHUB_OUTPUT
+          else
+            echo "releasable=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Configure git
+        if: steps.check.outputs.releasable == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run standard-version
+        if: steps.check.outputs.releasable == 'true'
+        run: npx standard-version
+
+      - name: Push changes and tags
+        if: steps.check.outputs.releasable == 'true'
+        run: git push --follow-tags

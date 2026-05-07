@@ -25,11 +25,36 @@ for (const hook of fs.readdirSync(srcDir)) {
   console.log(`copied: .husky/${hook}`);
 }
 
-// .versionrc.cjs 생성 (없을 때만, type:module 여부 무관하게 .cjs 사용)
+// .versionrc.cjs 생성 (없을 때만)
 const versionrc = path.join(projectRoot, ".versionrc.cjs");
 if (!fs.existsSync(versionrc)) {
   fs.writeFileSync(versionrc, 'module.exports = require("@knpeople/dev-config/versionrc");\n');
   console.log("created: .versionrc.cjs");
+}
+
+// .github/workflows/release.yml 생성 (없을 때만)
+const workflowsDir = path.join(projectRoot, ".github", "workflows");
+const workflowFile = path.join(workflowsDir, "release.yml");
+if (!fs.existsSync(workflowFile)) {
+  fs.mkdirSync(workflowsDir, { recursive: true });
+  fs.writeFileSync(
+    workflowFile,
+    [
+      "name: Release",
+      "",
+      "on:",
+      "  push:",
+      "    branches:",
+      "      - main",
+      "",
+      "jobs:",
+      "  release:",
+      "    uses: knpeople/dev-config/.github/workflows/release.yml@main",
+      "    permissions:",
+      "      contents: write",
+    ].join("\n") + "\n"
+  );
+  console.log("created: .github/workflows/release.yml");
 }
 
 // package.json 스크립트 수정
@@ -42,30 +67,6 @@ let pkgChanged = false;
 if (pkg.scripts.prepare === "husky") {
   delete pkg.scripts.prepare;
   console.log("removed: scripts.prepare (husky auto-generated)");
-  pkgChanged = true;
-}
-
-if (!pkg.scripts.release) {
-  pkg.scripts.release = "node node_modules/@knpeople/dev-config/scripts/release.js";
-  console.log("added: scripts.release to package.json");
-  pkgChanged = true;
-}
-
-if (!pkg.scripts["release:minor"]) {
-  pkg.scripts["release:minor"] = "node node_modules/@knpeople/dev-config/scripts/release.js --release-as minor";
-  console.log("added: scripts.release:minor to package.json");
-  pkgChanged = true;
-}
-
-if (!pkg.scripts["release:major"]) {
-  pkg.scripts["release:major"] = "node node_modules/@knpeople/dev-config/scripts/release.js --release-as major";
-  console.log("added: scripts.release:major to package.json");
-  pkgChanged = true;
-}
-
-if (!pkg.scripts.push) {
-  pkg.scripts.push = "node node_modules/@knpeople/dev-config/scripts/push.js";
-  console.log("added: scripts.push to package.json");
   pkgChanged = true;
 }
 
